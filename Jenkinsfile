@@ -7,16 +7,8 @@ pipeline {
                 // Path to your shell script file
                 script {
                     // Specify the path to your shell script file
-                    def scriptFilePath = "./home/ec2-user/trigger.sh"
+                    sh ./home/ec2-user/trigger.sh
                     
-                    // Make sure the script file exists
-                    if (fileExists(scriptFilePath)) {
-                        // Execute the shell script
-                        sh "chmod +x ${scriptFilePath}" // Make the script executable
-                        sh "./${scriptFilePath}" // Run the script
-                    } else {
-                        error "Script file not found at ${scriptFilePath}"
-                    }
                 }
             }
         }
