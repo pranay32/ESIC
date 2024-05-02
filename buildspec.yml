@@ -1,0 +1,25 @@
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - sudo wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
+      - sudo sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
+      - sudo yum install -y apache-maven
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Compiling ata server
+      - mvn clean package
+      - mvn -f filesystem/commonlib/pom.xml clean package
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - curl -X POST \
+          -H "Content-Type: multipart/form-data" \
+          -F "file=.//filesystem//csv//suite.csv" \
+          -F "req={\"project\":{\"_id\":\"65812944899a1d5decb43cbe\"},\"execution\":{\"resolution\":\"1920x1200\",\"suite_id\":\"65812bb4899a1d5decb43ccb\",\"send_mail\":false,\"hub_ip\":\"11.0.133.181\",\"port\":4445,\"browser\":[\"Chrome\"]}}" \
+          https://devserver.icodetest.com:8080/execute/pipeline/suite
+# Include only the files required for your application to run.
+artifacts:
+  files:
+    - '**/*'
