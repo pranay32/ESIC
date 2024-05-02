@@ -8,3 +8,4 @@ projectName='project1'
 suiteName='onlyStep'
 response1=$(curl -X POST -H "Authorization: ${bearer}" -H "Content-Type: multipart/form-data" -F "suitename=${suiteName}" -F "projectname=${projectName}" -F "file=@/home/ec2-user/ata_server/suite.csv" https://devserver.icodetest.com:8080/execute/pipeline/suite)
 echo $response1
+echo $api
