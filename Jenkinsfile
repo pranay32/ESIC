@@ -7,7 +7,7 @@ pipeline {
                 // Path to your shell script file
                 script {
                     // Specify the path to your shell script file
-                    def scriptFilePath = "./trigger.sh"
+                    def scriptFilePath = "./home/ec2-user/trigger.sh"
                     
                     // Make sure the script file exists
                     if (fileExists(scriptFilePath)) {
