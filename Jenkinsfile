@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent {label 'linux}
     
     stages {
         stage('Run Shell Script') {
@@ -7,7 +7,7 @@ pipeline {
                 // Path to your shell script file
                 script {
                     // Specify the path to your shell script file
-                    sh /home/ec2-user/trigger.sh
+                    sh '/home/ec2-user/trigger.sh'
                     
                 }
             }
